@@ -3,6 +3,7 @@ import tensorflow as tf
 import difmod
 import config
 import data
+import os
 
 if __name__ == '__main__' :
     # load dataset
@@ -24,6 +25,8 @@ if __name__ == '__main__' :
 
     # save the best model based on the validation KID metric
     checkpoint_path = "checkpoints/diffusion_model"
+    if not os.path.exists(os.path.dirname(checkpoint_path)) :
+        os.makedirs(os.path.dirname(checkpoint_path))
     checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
         filepath=checkpoint_path,
         save_weights_only=True,
